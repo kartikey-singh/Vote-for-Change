@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<section id="banner">
+				<div class="inner">
+
+					<div class="content">
+									<h2>Registration</h2>
+									{% if messages %}
+										{% for msg in messages %}
+											<div class="row 50%" style="background: red">
+												{{msg.message}}
+											</div>
+										{% endfor %}
+									{% endif %}	
+									<form  method="POST" action="" role="form">
+										{%csrf_token%}
+										<div class="row 50%">
+											<div class="12u">
+												<input type="text" name="first_name" placeholder="First Name" value="{{first_name}}" />
+											</div>
+										</div>
+										<div class="row 50%">
+											<div class="12u">
+												<input type="text" name="last_name" placeholder="Last Name" value="{{last_name}}" />
+											</div>
+										</div>
+
+										<div class="row 50%">
+											<div class="12u">
+												<input type="text" name="email" placeholder="Email" value="{{email}}" />
+											</div>
+										</div>
+										<div class="row 50%">
+											<div class="12u">
+												<input type="password" name="password" placeholder="Password" />
+											</div>
+										</div>
+
+										<div class="row 50%">
+											<div class="12u">
+												<input type="password" name="repassword" placeholder="Re Enter Password" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="12u">
+												<ul class="buttons">
+													<li><input type="submit" class="special" value="Registration" /></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+								</div>
+
+					</div>
+				</section>
+{% endblock %}

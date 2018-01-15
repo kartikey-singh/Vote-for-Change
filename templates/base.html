@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Vote for Change</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	</head>
+	{% block body %}<body class="index">{% endblock %}
+		<div id="page-wrapper">
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1 id="logo"><a href="/home">Vote<span> for change</span></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="current">Welcome <a href="/home" id="email">{{email}}</a></li>
+							<li class="submenu">
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="/dashboard/">Dashboard</a></li>
+									<li><a href="/leftbar/">Left Sidebar</a></li>
+									<li><a href="/rightbar/">Right Sidebar</a></li>
+									<li><a href="/nobar/">No Sidebar</a></li>
+									<li><a href="/contact/">Contact</a></li>
+								</ul>
+							</li>
+							{% if not user.is_authenticated %}
+							<li><a href="/registration/" class="button special">Sign Up</a></li>
+							<li><a href="/login/" class="button special">Login</a></li>
+							{% else %}
+							<li><a href="/logout/" class="button special">Logout</a></li>
+							{% endif %}
+						</ul>
+					</nav>
+				</header>
+				{% block content %}{% endblock %}
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="copyright">
+						<li>&copy; ExquisiteDev</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrollgress.min.js' %}"></script>
+			<script src="{% static 'js/skel.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+
+	</body>
+</html>
