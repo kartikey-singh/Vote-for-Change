@@ -2,21 +2,52 @@
 {% load staticfiles %}
 {% block body %}<body class="index">{% endblock %}
 {% block content %}
-<div id="page-wrapper">
-	<section class="wrapper style2 container special-alt">
-							<div class="row 50%">
-								<div class="8u 12u(narrower)">
-									<h2>POLLS AVAILABLE : </h2>
-									<footer>
-										<ul class="buttons">
-											<li><a href="#" class="button">Find Out More</a></li>
-										</ul>
-									</footer>
-
-								</div>
-	</section>
+<!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css'> -->
+<article id="main">
+    <section class="wrapper style2 container special-alt">
+        <div class="row 50%">
+            <div class="8u 12u(narrower)">
+                <h4>Name</h4>
+		                <input type="radio" name="support" id="1">I support the cause</input>
+                <br />
+                <input type="radio" name="support" id="2">I do not support the cause</input>
+                <ul class="buttons">
+                    <li><a href="#" class="button">Submit</a></li>
+                </ul>
+                <footer>
+                    <ul class="buttons">
+                        <li><a href="#" class="button">Find Out More</a></li>
+                    </ul>
+                </footer>
+            </div>
+        </div>
+    </section>
+</article>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>	
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js'></script>
 <script type="text/javascript">
-	var email = document.getElementById("email").innerHTML;
-	console.log(email);
+var email = document.getElementById("email").innerHTML;
+function ajax_get(data,URL){
+	$.ajax({
+	    url: URL,                 // the endpoint
+	    type: "POST",             // http method
+	    data: data,              // data sent with the post request
+	    success: function(json) { // handle a successful response
+	      obj = json;
+	      console.log(obj);    // log the returned json to the console
+	    },
+	    async: false
+		});
+}
+ajax_get({email:email},'/getcausedata/');
+function read(){
+		var data = "<section class='wrapper style2 container special-alt'><div class='row 50%'><div class='8u 12u(narrower)'><h4>Names</h4>" +
+		            "<input type='radio' name='support' id='1'>I support the cause</input><br />" +
+                	"<input type='radio' name='support' id='2'>I do not support the cause</input>"+
+                	"<ul class='buttons'><li><a href='#' class='button' id='sub'>Submit</a></li></ul><footer><ul class='buttons'><li>"+
+                	"<a href='#' class='button' id='visual'>Find Out More</a></li></ul></footer></div></div></section>";
+        $("#main").append(data);        	
+}
+read();
 </script>
 {% endblock %}

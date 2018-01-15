@@ -91,7 +91,7 @@ def LogoutView(request):
 def getCauseData(request):
     context = {}
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = request.POST
         email = data.get("email")
         print(email)
         causeArray = []
@@ -103,7 +103,7 @@ def getCauseData(request):
         for cause in cause_list:
             causeObject = {}
             causeObject['name'] = cause.name
-            causeObject['id'] = cause.causeId
+            causeObject['causeId'] = cause.causeId
             try:
                 vote = Vote.objects.get(user=user,cause=cause)
                 causeObject['activeStatus'] = str(vote.activeStatus).lower()
@@ -129,6 +129,7 @@ def getCauseData(request):
         return JsonResponse(context)   
 # @login_required(login_url = "/login")
 @csrf_exempt
+@login_required(login_url = "/login")
 def submitCauseData(request):
     response_data = {}
     #if someone clicks submit then it mean activestatus=True
