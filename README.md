@@ -3,10 +3,10 @@ App Name- Vote For Change
 
 Team Name- ExquisiteDev
 
-Team Members- Aayush Mishra
+Team Members-
 
+              Aayush Mishra
               Ashwini Raj
-              
               Kartikey Singh
 
 This app is for the Code.Fun.Do organized by Academia Accelerator.
