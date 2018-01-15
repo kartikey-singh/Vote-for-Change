@@ -22,11 +22,11 @@ def home(request):
 		return render(request, 'index.html', {'email' : request.user.email})
 	else :
 		return render(request, 'index.html')	
-def leftbar(request):
+def about(request):
 	if request.user.is_authenticated():
-		return render(request, 'left-sidebar.html', {'email' : request.user.email})
+		return render(request, 'about.html', {'email' : request.user.email})
 	else :
-		return render(request, 'left-sidebar.html')
+		return render(request, 'about.html')
 def rightbar(request):
 	if request.user.is_authenticated():
 		return render(request, 'right-sidebar.html', {'email' : request.user.email})	

@@ -6,8 +6,7 @@ from django.contrib.auth.views import *
 urlpatterns=[
     url(r'^$', home),       
     url(r'^home/$', home, name='home'),
-    url(r'^leftbar/$', leftbar, name='leftbar'),
-    url(r'^leftbar/$', leftbar, name='leftbar'),
+    url(r'^about/$', about, name='about'),
     url(r'^rightbar/$', rightbar, name='rightbar'),
     url(r'^nobar/$', nobar, name='nobar'),
     url(r'^contact/$', contact, name='contact'),
