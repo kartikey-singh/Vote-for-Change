@@ -14,11 +14,10 @@
 					<h1 id="logo"><a href="/home">Vote<span> for change</span></a></h1>
 					<nav id="nav">
 						<ul>
-							<li class="current">Welcome <a href="/home" id="email">{{email}}</a></li>
+							<li class="current"> <a href="/home">Welcome <span id="email">{{email}}</span></a></li>
 							<li class="submenu">
 								<a href="#">Layouts</a>
 								<ul>
-									<li><a href="/dashboard/">Dashboard</a></li>
 									<li><a href="/leftbar/">Left Sidebar</a></li>
 									<li><a href="/rightbar/">Right Sidebar</a></li>
 									<li><a href="/nobar/">No Sidebar</a></li>
@@ -29,6 +28,7 @@
 							<li><a href="/registration/" class="button special">Sign Up</a></li>
 							<li><a href="/login/" class="button special">Login</a></li>
 							{% else %}
+							<li><a href="/dashboard/" class="button special">Dashboard</a></li>
 							<li><a href="/logout/" class="button special">Logout</a></li>
 							{% endif %}
 						</ul>

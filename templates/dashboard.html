@@ -2,20 +2,25 @@
 {% load staticfiles %}
 {% block body %}<body class="index">{% endblock %}
 {% block content %}
-<!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css'> -->
+<section id="banner">
+				<div class="inner">
+						<!-- Content -->
+								<div class="content">
+									<h2>Welcome </h2>
+	<h5>Written below are the currently available Polls for you.</h5>
+	<h5>Happy Polling :) </h5>
+								</div>
+
+					</div>
+					</section>
 <article id="main">
     <section class="wrapper style2 container special-alt">
         <div class="row 50%">
             <div class="8u 12u(narrower)">
-                <h4>Name</h4>
-		                <input type="radio" name="support" id="1">I support the cause</input>
-                <br />
-                <input type="radio" name="support" id="2">I do not support the cause</input>
-                <ul class="buttons">
-                    <li><a href="#" class="button">Submit</a></li>
-                </ul>
-                <footer>
-                    <ul class="buttons">
+                <h2>Name</h2>
+		        <h4>You have already submitted your vote for this Poll.</h4>
+		        <footer>
+		        	<ul class="buttons">
                         <li><a href="#" class="button">Find Out More</a></li>
                     </ul>
                 </footer>
@@ -39,14 +44,39 @@ function ajax_get(data,URL){
 	    async: false
 		});
 }
+
+function submit(causeId,checkId){
+	var submitStatus = "false";
+	if(document.getElementById("check" + checkId).checked) submitStatus = "true";
+	var data = {email:email,submitStatus:submitStatus,causeId:causeId};
+	console.log(data);
+	ajax_get(data,'/submitcausedata/');
+	location.reload();
+}
+
 ajax_get({email:email},'/getcausedata/');
+
 function read(){
-		var data = "<section class='wrapper style2 container special-alt'><div class='row 50%'><div class='8u 12u(narrower)'><h4>Names</h4>" +
-		            "<input type='radio' name='support' id='1'>I support the cause</input><br />" +
-                	"<input type='radio' name='support' id='2'>I do not support the cause</input>"+
-                	"<ul class='buttons'><li><a href='#' class='button' id='sub'>Submit</a></li></ul><footer><ul class='buttons'><li>"+
-                	"<a href='#' class='button' id='visual'>Find Out More</a></li></ul></footer></div></div></section>";
-        $("#main").append(data);        	
+	var cause_list = obj.causeData;
+	var x = 1,y = 1;
+	cause_list.forEach(function(cause) {
+		var data1 =  "<section class='wrapper style2 container special-alt'><div class='row 50%'><div class='8u 12u(narrower)'>"+
+        "<h2 id='" + cause.causeId + "'>" + cause.name + "</h2><h4>You have already submitted your vote for this Poll.</h4><footer><ul class='buttons'><li><a href='#' class='button' id='visual" + y + "'>Statistics</a></li></ul></footer></div></div></section>";
+		
+		var data2 = "<section class='wrapper style2 container special-alt'><div class='row 50%'><div class='8u 12u(narrower)'><h2 id='" +
+		cause.causeId + "'>" + cause.name + "</h2><h4>" +
+	    "<input type='radio' name='support' id='check" + x + "'>I support the cause</input><br />" +
+       	"<input type='radio' name='support' id='check" + (x + 1) + "'>I do not support the cause</input></h4>"+
+        "<footer><ul class='buttons'><li><a href='#' class='button' id='sub" + y + 
+        "' onclick='submit(" + cause.causeId + "," + x + ")'>Submit</a></li></ul></footer></div></div></section>";
+        
+        if(cause.activeStatus === "true") $("#main").append(data1);
+        else $("#main").append(data2);
+        
+        x+=2;        
+        y++;
+        console.log(data1);
+    });	
 }
 read();
 </script>

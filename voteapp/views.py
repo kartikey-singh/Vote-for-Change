@@ -15,6 +15,7 @@ import requests, json, facebook, re
 from .models import *
 import datetime
 from django.utils import timezone
+from django.template import RequestContext
 
 def home(request):
 	if request.user.is_authenticated():
@@ -46,7 +47,18 @@ def contact(request):
 # def registration(request):
 # 	return render(request, 'registration/registration.html')	
 # def login(request):
-# 	return render(request, 'registration/login.html')			
+# 	return render(request, 'registration/login.html')	
+def handler404(request):
+    response = render_to_response('404.html', {},context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    response = render_to_response('500.html', {},context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
+
 @login_required(login_url = "/login")
 def DashboardView(request):
     if request.method =='GET':
@@ -86,7 +98,7 @@ def LogoutView(request):
     logout(request)
     return redirect('/')
 
-# @login_required(login_url = "/login")
+@login_required(login_url = "/login")
 @csrf_exempt
 def getCauseData(request):
     context = {}
@@ -134,7 +146,7 @@ def submitCauseData(request):
     response_data = {}
     #if someone clicks submit then it mean activestatus=True
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = request.POST
         email = data.get("email")
         print(email)
         causeId = data.get("causeId")

@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.contrib.auth import views
 from django.views.generic import RedirectView
 from django.conf.urls import include
-
+handler404 = 'voteapp.views.handler404'
+handler500 = 'voteapp.views.handler500'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('voteapp.urls')),
