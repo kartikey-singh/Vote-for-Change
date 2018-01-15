@@ -12,7 +12,7 @@ class UserProfile(models.Model):
 
 class Cause(models.Model):
 	causeId = models.AutoField(primary_key = True)
-	name = models.CharField(max_length=50)
+	name = models.CharField(max_length=100)
 	# user = models.ForeignKey(User,null=True)
 	# activeStatus = models.BooleanField(default=False)    
 	# submitStatus = models.BooleanField(default=False)    
