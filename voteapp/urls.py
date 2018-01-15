@@ -7,6 +7,7 @@ urlpatterns=[
     url(r'^$', home),       
     url(r'^home/$', home, name='home'),
     url(r'^about/$', about, name='about'),
+    url(r'^underconstruction/$', underconstruction, name='underconstruction'),
     url(r'^rightbar/$', rightbar, name='rightbar'),
     url(r'^nobar/$', nobar, name='nobar'),
     url(r'^contact/$', contact, name='contact'),

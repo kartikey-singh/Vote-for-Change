@@ -46,8 +46,8 @@ def contact(request):
 # 	return render(request, 'dashboard.html',{'email':email})			
 # def registration(request):
 # 	return render(request, 'registration/registration.html')	
-# def login(request):
-# 	return render(request, 'registration/login.html')	
+def underconstruction(request):
+	return render(request, 'under-construction.html')	
 def handler404(request):
     response = render_to_response('404.html', {},context_instance=RequestContext(request))
     response.status_code = 404
