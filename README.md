@@ -1,8 +1,12 @@
 # vote
 App Name- Vote For Change
+
 Team Name- ExquisiteDev
+
 Team Members- Aayush Mishra
+
               Ashwini Raj
+              
               Kartikey Singh
 
 This app is for the Code.Fun.Do organized by Academia Accelerator.
@@ -14,11 +18,18 @@ This project is a web based application concerned about voting for a cause regar
 HOW TO USE THIS APP :
 
 Clone this repository
+
 Create a virtual environment(python) for django==1.9.8
+
 Type "python manage.py runserver --insecure"  (to run the project in DEBUG=False mode and deploy static files)
+
 Else
+
 Type "python manage.py runserver" (change DEBUG=True in settings.py this will disable custom error 404 and 500 pages)
+
 Create your profile by registration
+
 Then Login and go to Dashboard
+
 Enjoy Polling :)
 
