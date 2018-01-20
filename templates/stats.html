@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}<body class="index">{% endblock %}
+{% block content %}
+<section id="banner">
+				<div class="inner">
+						<!-- Content -->
+								<div class="content">
+									<h2>Statistics for the Geek in you </h2>
+	<h5>Written below are the currently available Stats for your currently submitted Poll.</h5>
+	<h5>Happy Analyzing :) </h5>
+								</div>
+
+					</div>
+					</section>
+<article id="main">
+	    <section class="wrapper style2 container special-alt">
+        <div class="row 50%">
+            <div class="8u 12u(narrower)">
+                 <div id="chartContainer1" class="12u" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+    	</section>
+    	<section class="wrapper style2 container special-alt">
+        <div class="row 50%">
+            <div class="8u 12u(narrower)">
+                <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+    	</section>
+</article>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer1", {
+		title:{
+			text: "{{name}}"              
+		},
+		axisY: {
+			title: "Total Number of people"
+		},
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "column",
+			dataPoints: [
+				{ label: "Votes in Approval",  y: {{favour}}  },
+				{ label: "Votes in Disapproval ", y: {{oppose}}  }
+            ]
+		}
+		]
+	});
+
+var chart1 = new CanvasJS.Chart("chartContainer2", {
+	exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "{{name}}"
+	},
+	legend:{
+		cursor: "pointer",
+		itemclick: explodePie
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "{name}: <strong>{y}%</strong>",
+		indexLabel: "{name} - {y}%",
+		dataPoints: [
+			{ y: {{opp_per}}, name: "Votes in Disapproval", exploded: true },
+			{ y: {{fav_per}}, name: "Votes in Approval" },
+		]
+	}]
+});
+chart1.render();
+chart.render();	
+}
+
+function explodePie (e) {
+	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+	} else {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+	}
+	e.chart.render();
+
+}
+</script>
+{% endblock %}

@@ -17,4 +17,5 @@ urlpatterns=[
     url(r'^registration/$', RegistrationView, name='registration'),
     url(r'^getcausedata/$', getCauseData, name='getCauseData'),
     url(r'^submitcausedata/$', submitCauseData, name='submitCauseData'),
+    url(r'^stats/(?P<email>\S+)/(?P<causeId>[0-9]+)/$', stats, name='stats'),
 ]

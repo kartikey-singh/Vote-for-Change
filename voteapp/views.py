@@ -257,3 +257,34 @@ def RegistrationView(request):
 
     else:#request.method == "GET"
         return render(request,template_name,context)
+
+@csrf_exempt
+@login_required(login_url = "/login")
+def stats(request,email,causeId):
+    # print(causeId)
+    # print(email)
+    context = {}
+    try: 
+        user = User.objects.get(email=email)
+        cause = Cause.objects.get(causeId=causeId)
+        # if request.method =='GET':
+        # template_name = 'canvasjs.html'
+        vote_favour = Vote.objects.filter(cause=cause,submitStatus=True)
+        vote_oppose = Vote.objects.filter(cause=cause,submitStatus=False)
+        context['email'] = email
+        context['name'] = cause.name
+        context['causeId'] = cause.causeId
+        context['favour'] = len(vote_favour)
+        context['oppose'] = len(vote_oppose)
+        context['fav_per'] = round((len(vote_favour)/(len(vote_favour)+len(vote_oppose)))*100,3)
+        context['opp_per'] = round((len(vote_oppose)/(len(vote_favour)+len(vote_oppose)))*100,3)
+            # print(len(vote_favour))
+    # print(len(vote_oppose))
+    # for vote in vote_list:
+        # print(vote)
+        # return JsonResponse(context) 
+        # if request.method =='GET':
+        #     template_name = 'index.html'
+        return render(request, 'stats.html',context)     
+    except:
+        return render(request,'under-construction.html')    
