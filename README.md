@@ -1,4 +1,4 @@
-# vote
+# Vote for Change
 App Name- Vote For Change
 
 Team Name- ExquisiteDev
